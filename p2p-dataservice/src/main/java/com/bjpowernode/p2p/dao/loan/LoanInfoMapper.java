@@ -62,4 +62,10 @@ public interface LoanInfoMapper {
      */
     int updateByPrimaryKey(LoanInfo record);
 
+    /**
+     * 查询历史年化收益率
+     *
+     * @return
+     */
+    Double queryHistoryAverage();
 }

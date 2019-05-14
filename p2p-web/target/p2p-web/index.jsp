@@ -37,7 +37,7 @@
         <!-- 未登录状态 -->
         <div class="register">
             <h3>动力金融网历史年化收益率</h3>
-            <h4><span id="avg">13.8</span>%</h4>
+            <h4><span id="avg">${historyAverageRate}</span>%</h4>
             <div class="bn_register"><a href="register.jsp" class="btn-1">免费注册</a></div>
             <div class="login">有账号? <a href="login.jsp">立即登录</a></div>
         </div>
