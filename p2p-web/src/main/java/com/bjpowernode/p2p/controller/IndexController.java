@@ -2,15 +2,17 @@ package com.bjpowernode.p2p.controller;
 
 import com.bjpowernode.p2p.common.constant.Constants;
 import com.bjpowernode.p2p.service.LoanInfoService;
+import com.bjpowernode.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
 /**
  * 首页信息展示
  */
+@Controller
 public class IndexController {
 
 
@@ -19,6 +21,8 @@ public class IndexController {
      */
     @Autowired
     private LoanInfoService loanInfoService;
+    @Autowired
+    private UserService userService;
 
 
     /**
@@ -29,13 +33,16 @@ public class IndexController {
      */
     @RequestMapping("/index")
     public String index(Model model) {
+
         //查询历史年化收益率
         Double historyAverage = loanInfoService.queryHistoryAverage();
-        //将查出来的历史年化收益率放到model里
         model.addAttribute(Constants.HISTORY_AVERAGE_RATE, historyAverage);
-        System.out.println("我爱你");
+
+        //查询平台总人数
+        Long allUserCount = userService.queryAllUserCount();
+        model.addAttribute(Constants.ALL_USER_COUNT, allUserCount);
+
         return "/index";
     }
-
 
 }

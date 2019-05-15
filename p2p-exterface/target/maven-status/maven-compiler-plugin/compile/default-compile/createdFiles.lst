@@ -1,6 +1,7 @@
 com\bjpowernode\p2p\model\loan\LoanInfo.class
 com\bjpowernode\p2p\model\vo\BidUserTop.class
 com\bjpowernode\p2p\model\vo\PaginatinoVO.class
+com\bjpowernode\p2p\service\UserService.class
 com\bjpowernode\p2p\model\loan\RechargeRecord.class
 com\bjpowernode\p2p\model\user\FinanceAccount.class
 com\bjpowernode\p2p\service\LoanInfoService.class

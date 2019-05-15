@@ -64,7 +64,7 @@
         </div>
         <div class="jinxin-data">
             <h3>平台用户数</h3>
-            <div class="data"><span id="hzxx_ljrs">88888</span>位</div>
+            <div class="data"><span id="hzxx_ljrs">${allUserCount}</span>位</div>
             <div class="line"></div>
             <h3>累计成交额</h3>
             <div class="data"><span id="hzxx_ljje">1000000000</span>元</div>

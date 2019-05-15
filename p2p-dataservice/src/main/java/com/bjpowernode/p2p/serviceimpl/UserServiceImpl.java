@@ -1,22 +1,24 @@
 package com.bjpowernode.p2p.serviceimpl;
 
 import com.bjpowernode.p2p.common.constant.Constants;
-import com.bjpowernode.p2p.dao.loan.LoanInfoMapper;
-import com.bjpowernode.p2p.service.LoanInfoService;
-import org.jboss.netty.util.Timeout;
+import com.bjpowernode.p2p.dao.user.UserMapper;
+import com.bjpowernode.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
-@Service("loanInfoServiceImpl")
-public class LoanInfoServiceImpl implements LoanInfoService {
+import java.util.concurrent.TimeUnit;
 
+@Service("userServiceImpl")
+public class UserServiceImpl implements UserService {
     /**
      * 注入Dao层对象
      */
     @Autowired
-    private LoanInfoMapper loanInfoMapper;
+    UserMapper userMapper;
+
     /**
      * 注入redis模板
      */
@@ -25,29 +27,33 @@ public class LoanInfoServiceImpl implements LoanInfoService {
 
 
     /**
-     * 查询历史年化收益率
+     * 查询平台总人数
      *
      * @return
      */
     @Override
-    public Double queryHistoryAverage() {
+    public Long queryAllUserCount() {
 
         //修改key的序列化方式
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        //先从缓存中查找数据
-        Double historyAverage = (Double) redisTemplate.opsForValue().get(Constants.HISTORY_AVERAGE_RATE);
+
+        //获取一个绑定key的操作对象
+        BoundValueOperations<Object, Object> ops = redisTemplate.boundValueOps(Constants.ALL_USER_COUNT);
+
+        //先从缓存中获取平台总人数
+        Long allUserCount = (Long) ops.get();
+
         //如果缓存里没有，就从数据库里查，并放到缓存里
-        if (historyAverage == null) {
+        if (allUserCount == null) {
             synchronized (this) {
-                if (historyAverage == null) {
+                if (allUserCount == null) {
                     //从数据库里查
-                    historyAverage = loanInfoMapper.queryHistoryAverage();
+                    allUserCount = userMapper.queryAllUserCount();
                     //放到缓存里
-                    redisTemplate.opsForValue().set(Constants.HISTORY_AVERAGE_RATE, historyAverage);
+                    ops.set(allUserCount, 10, TimeUnit.MINUTES);
                 }
             }
         }
-
-        return historyAverage;
+        return allUserCount;
     }
 }

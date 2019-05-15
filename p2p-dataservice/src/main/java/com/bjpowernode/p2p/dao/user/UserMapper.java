@@ -51,5 +51,10 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
-
+    /**
+     * 查询平台总人数
+     *
+     * @return
+     */
+    Long queryAllUserCount();
 }

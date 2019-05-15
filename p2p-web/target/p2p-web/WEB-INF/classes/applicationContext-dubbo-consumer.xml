@@ -18,4 +18,11 @@
             version="1.0.0"
             check="false"/>
 
+    <!--用户业务-->
+    <dubbo:reference
+            id="userService"
+            interface="com.bjpowernode.p2p.service.UserService"
+            version="1.0.0"
+            check="false"/>
+
 </beans>

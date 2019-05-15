@@ -166,6 +166,13 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!--查询平台总人数-->
+    <select id="queryAllUserCount" resultType="java.lang.Long">
+        SELECT
+	    count( id )
+        FROM
+	    u_user
+    </select>
 
 
 </mapper>
