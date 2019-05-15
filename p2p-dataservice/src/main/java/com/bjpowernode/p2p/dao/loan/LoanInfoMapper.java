@@ -2,6 +2,7 @@ package com.bjpowernode.p2p.dao.loan;
 
 import com.bjpowernode.p2p.model.loan.LoanInfo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,4 +69,10 @@ public interface LoanInfoMapper {
      * @return
      */
     Double queryHistoryAverage();
+
+
+    /**
+     * 根据不同的产品类型查出不同数量的数据
+     */
+    List<LoanInfo> queryLoanInfoListByProductType(HashMap<String, Object> paramMap);
 }

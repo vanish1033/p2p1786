@@ -25,4 +25,11 @@
             version="1.0.0"
             check="false"/>
 
+    <!--投资业务-->
+    <dubbo:reference
+            id="bidInfoService"
+            interface="com.bjpowernode.p2p.service.BidInfoService"
+            version="1.0.0"
+            check="false"/>
+
 </beans>

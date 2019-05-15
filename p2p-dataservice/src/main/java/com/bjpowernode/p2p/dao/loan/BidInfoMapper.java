@@ -1,6 +1,7 @@
 package com.bjpowernode.p2p.dao.loan;
 
 import com.bjpowernode.p2p.model.loan.BidInfo;
+
 import java.util.List;
 
 public interface BidInfoMapper {
@@ -52,4 +53,10 @@ public interface BidInfoMapper {
      */
     int updateByPrimaryKey(BidInfo record);
 
+    /**
+     * 查询平台交易总金额
+     *
+     * @return
+     */
+    Double queryAllAbidMoney();
 }

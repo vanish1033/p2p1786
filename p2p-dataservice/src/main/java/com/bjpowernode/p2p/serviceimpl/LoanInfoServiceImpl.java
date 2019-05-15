@@ -2,12 +2,16 @@ package com.bjpowernode.p2p.serviceimpl;
 
 import com.bjpowernode.p2p.common.constant.Constants;
 import com.bjpowernode.p2p.dao.loan.LoanInfoMapper;
+import com.bjpowernode.p2p.model.loan.LoanInfo;
 import com.bjpowernode.p2p.service.LoanInfoService;
 import org.jboss.netty.util.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Service("loanInfoServiceImpl")
 public class LoanInfoServiceImpl implements LoanInfoService {
@@ -49,5 +53,14 @@ public class LoanInfoServiceImpl implements LoanInfoService {
         }
 
         return historyAverage;
+    }
+
+
+    /**
+     * 根据不同的产品类型查出不同数量的数据
+     */
+    @Override
+    public List<LoanInfo> queryLoanInfoListByProductType(HashMap<String, Object> paramMap) {
+        return loanInfoMapper.queryLoanInfoListByProductType(paramMap);
     }
 }
