@@ -290,4 +290,22 @@
             b_loan_info
     </select>
 
+
+    <!--  查询首页产品信息  -->
+    <!--    因为懒所以用*了，建议不要这样用-->
+    <select id="queryLoanInfoListByProductType" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        b_loan_info
+        <where>
+            <if test="productType != null">
+                product_type = #{productType}
+            </if>
+        </where>
+        ORDER BY
+        release_time
+        LIMIT #{currentPage},#{pageSize}
+    </select>
+
 </mapper>

@@ -150,7 +150,7 @@
     <!--查询平台交易总金额-->
     <select id="queryAllAbidMoney" resultType="java.lang.Double">
         SELECT
-	    sum( bidMoney )
+	    sum( bid_money )
         FROM
 	    b_bid_info
     </select>
