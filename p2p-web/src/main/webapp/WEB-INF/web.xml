@@ -42,4 +42,12 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+
 </web-app>

@@ -304,8 +304,21 @@
             </if>
         </where>
         ORDER BY
-        release_time
+        release_time DESC
         LIMIT #{currentPage},#{pageSize}
+    </select>
+
+    <!--查询总数据量-->
+    <select id="selectTotal" resultType="java.lang.Long">
+        SELECT
+        count( * )
+        FROM
+        b_loan_info
+        <where>
+            <if test="productType != null">
+                product_type = #{productType}
+            </if>
+        </where>
     </select>
 
 </mapper>

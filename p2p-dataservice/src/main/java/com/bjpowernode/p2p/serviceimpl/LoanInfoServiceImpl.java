@@ -3,6 +3,7 @@ package com.bjpowernode.p2p.serviceimpl;
 import com.bjpowernode.p2p.common.constant.Constants;
 import com.bjpowernode.p2p.dao.loan.LoanInfoMapper;
 import com.bjpowernode.p2p.model.loan.LoanInfo;
+import com.bjpowernode.p2p.model.vo.PaginatinoVO;
 import com.bjpowernode.p2p.service.LoanInfoService;
 import org.jboss.netty.util.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("loanInfoServiceImpl")
 public class LoanInfoServiceImpl implements LoanInfoService {
@@ -58,9 +60,32 @@ public class LoanInfoServiceImpl implements LoanInfoService {
 
     /**
      * 根据不同的产品类型查出不同数量的数据
+     *
+     * @param paramMap
+     * @return
      */
     @Override
     public List<LoanInfo> queryLoanInfoListByProductType(HashMap<String, Object> paramMap) {
         return loanInfoMapper.queryLoanInfoListByProductType(paramMap);
+    }
+
+    /**
+     * 根据分页参数和产品类型进行查询
+     *
+     * @param paramMap
+     * @return
+     */
+    @Override
+    public PaginatinoVO<LoanInfo> queryLoanInfoByPage(Map<String, Object> paramMap) {
+        PaginatinoVO<LoanInfo> infoPaginatinoVO = new PaginatinoVO<>();
+
+        //查询总数据量
+        Long total = loanInfoMapper.selectTotal(paramMap);
+        infoPaginatinoVO.setTotal(total);
+
+        //查询产品详细数据
+        List<LoanInfo> loanInfoList = loanInfoMapper.queryLoanInfoListByProductType(paramMap);
+        infoPaginatinoVO.setDataList(loanInfoList);
+        return infoPaginatinoVO;
     }
 }

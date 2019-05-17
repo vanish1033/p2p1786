@@ -74,5 +74,16 @@ public interface LoanInfoMapper {
     /**
      * 根据不同的产品类型查出不同数量的数据
      */
-    List<LoanInfo> queryLoanInfoListByProductType(HashMap<String, Object> paramMap);
+    List<LoanInfo> queryLoanInfoListByProductType(Map<String, Object> paramMap);
+
+    /**
+     * 查询总数据量
+     *
+     * @param paramMap
+     * @return
+     */
+    Long selectTotal(Map<String, Object> paramMap);
+
+
+
 }
