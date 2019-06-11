@@ -88,4 +88,14 @@ public class LoanInfoServiceImpl implements LoanInfoService {
         infoPaginatinoVO.setDataList(loanInfoList);
         return infoPaginatinoVO;
     }
+
+    /**
+     * 通过产品id查询产品详情
+     *
+     * @return
+     */
+    @Override
+    public LoanInfo queryLoanInfoById(Integer id) {
+        return loanInfoMapper.selectByPrimaryKey(id);
+    }
 }

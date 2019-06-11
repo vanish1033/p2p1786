@@ -186,7 +186,7 @@
                         </div>
                     </div>
                     <div class="pro-btn">
-                        <a href="loan/loanInfo?id=${loanInfo.id}" class="btn-1">立即投资</a>
+                        <a href="loan/loanInfo?id=${sLoanInfo.id}" class="btn-1">立即投资</a>
                     </div>
                 </div>
             </div>

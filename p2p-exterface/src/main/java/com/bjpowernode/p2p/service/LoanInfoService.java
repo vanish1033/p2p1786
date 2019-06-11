@@ -27,4 +27,11 @@ public interface LoanInfoService {
      * @return
      */
     PaginatinoVO<LoanInfo> queryLoanInfoByPage(Map<String, Object> paramMap);
+
+    /**
+     * 查询产品详情
+     *
+     * @return
+     */
+    LoanInfo queryLoanInfoById(Integer id);
 }

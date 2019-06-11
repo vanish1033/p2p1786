@@ -155,4 +155,32 @@
 	    b_bid_info
     </select>
 
+    <!--投资记录和用户的resultMap-->
+    <resultMap id="bidUserMap" type="com.bjpowernode.p2p.model.loan.BidInfo">
+        <id column="aid" property="id"/>
+        <result column="bid_money" property="bidMoney"/>
+        <result column="bid_time" property="bidTime"/>
+        <association property="user" javaType="com.bjpowernode.p2p.model.user.User">
+            <id column="bid" property="id"/>
+            <result column="phone" property="phone"/>
+        </association>
+    </resultMap>
+
+    <!--根据产品id查询产品交易详细记录和用户手机号-->
+    <select id="queryBidInfoByLoanId" resultMap="bidUserMap">
+        SELECT
+            a.id aid,
+            a.bid_money,
+            a.bid_time,
+            b.id bid,
+            b.phone
+        FROM
+            p2p.b_bid_info a
+            LEFT JOIN u_user b ON a.uid = b.id
+        WHERE
+            loan_id = #{id}
+        ORDER BY
+            a.bid_time DESC
+    </select>
+
 </mapper>

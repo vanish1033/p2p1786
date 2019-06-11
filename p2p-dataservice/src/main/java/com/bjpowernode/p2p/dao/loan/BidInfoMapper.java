@@ -59,4 +59,12 @@ public interface BidInfoMapper {
      * @return
      */
     Double queryAllAbidMoney();
+
+    /**
+     * 查询产品交易详细信息
+     *
+     * @param id
+     * @return
+     */
+    List<BidInfo> queryBidInfoByLoanId(Integer id);
 }

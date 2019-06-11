@@ -78,12 +78,12 @@ $(function(){
     <div class="ewm_weixin">
         <h3>动力网服务号</h3>
         <h4>更多服务请关注动力网服务号</h4>
-        <div class="ewm"><img src="images/ewm_fwh.jpg" alt="动力网服务号"></div>
+        <div class="ewm"><img src="/images/ewm_fwh.jpg" alt="动力网服务号"></div>
     </div>
     <div class="ewm_weixin">
         <h3>动力网订阅号</h3>
         <h4>获取动力网最新资讯</h4>
-        <div class="ewm"><img src="images/ewm_dyh.jpg" alt="动力网订阅号"></div>
+        <div class="ewm"><img src="/images/ewm_dyh.jpg" alt="动力网订阅号"></div>
     </div>
 </div>
 <!-- 二维码弹出层end -->

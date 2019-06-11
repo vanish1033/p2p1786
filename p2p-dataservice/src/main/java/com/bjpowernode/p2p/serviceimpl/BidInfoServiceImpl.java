@@ -2,6 +2,7 @@ package com.bjpowernode.p2p.serviceimpl;
 
 import com.bjpowernode.p2p.common.constant.Constants;
 import com.bjpowernode.p2p.dao.loan.BidInfoMapper;
+import com.bjpowernode.p2p.model.loan.BidInfo;
 import com.bjpowernode.p2p.service.BidInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundValueOperations;
@@ -9,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,11 +48,23 @@ public class BidInfoServiceImpl implements BidInfoService {
             synchronized (this) {
                 if (allAbidMoney == null) {
                     allAbidMoney = bidInfoMapper.queryAllAbidMoney();
-                    //把值放到redis中
+                    //把值放到redis中，设置15min的存活时间
                     ops.set(allAbidMoney, 15, TimeUnit.MINUTES);
                 }
             }
         }
         return allAbidMoney;
+    }
+
+    /**
+     * 查询产品交易记录
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public List<BidInfo> queryBidInfoByLoanId(Integer id) {
+
+        return bidInfoMapper.queryBidInfoByLoanId(id);
     }
 }
