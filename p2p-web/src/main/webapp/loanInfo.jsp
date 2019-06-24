@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>动力金融网-CFCA认证的互联网金融公司</title>
     <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bignumber.js"></script>
     <script type="text/javascript" src="/js/trafficStatistics.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/share.css"/>
@@ -102,7 +103,8 @@
                                             <span class="record-num">${index.count}</span>
                                             <span class="invest-user">${fn:substring(bidInfo.user.phone,0 ,3 )}******${fn:substring(bidInfo.user.phone,9 ,11 )}</span>
                                             <span class="invest-money">${bidInfo.bidMoney}</span>
-                                            <span class="invest-time"><fmt:formatDate value="${bidInfo.bidTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                                            <span class="invest-time"><fmt:formatDate value="${bidInfo.bidTime}"
+                                                                                      pattern="yyyy-MM-dd HH:mm:ss"/></span>
                                         </dd>
                                     </c:forEach>
 
@@ -177,6 +179,52 @@
 <!--页脚end-->
 
 <script type="text/javascript">
+
+    // 预计本息收入
+    function checkMoney() {
+        // 获取用户输入的投资金额
+        var bidMoney = $.trim($("#bidMoney").val());
+        var productType = "${loanInfo.productType}";
+        var cycle = "${loanInfo.cycle}";
+        var rate = "${loanInfo.rate}";
+        // 判断非空
+        if ("" == bidMoney) {
+            $(".max-invest-money").html("请输入投资金额");
+            return false;
+            // 判断是否为数字
+        } else if (isNaN(bidMoney)) {
+            $(".max-invest-money").html("请输入数字");
+            return false;
+            // 判断是否大于0
+        } else if (bidMoney <= 0) {
+            $(".max-invest-money").html("投资金额必须大于0");
+            return false;
+            // 判断是否为100的整数倍
+        } else if (bidMoney % 100 != 0) {
+            $(".max-invest-money").html("投资金额必须为100的整数倍");
+            return false;
+        } else {
+            //校验通过，清空错误提示信息
+            $(".max-invest-money").html("");
+            // 计算收益（收益 = 投资金额*日利率*投资天数）
+            var incomeMoney = "";//收益
+            // 把bidMoney变为BigNumber类型的
+            bidMoney = new BigNumber(bidMoney);
+
+            // 新手宝的收益，单位为天，保留2位小数
+            if (0 == productType) {
+                incomeMoney = bidMoney.multipliedBy(rate).dividedBy(36500).multipliedBy(cycle).decimalPlaces(2);
+            } else {
+                //散标或优选，单位为月
+                incomeMoney = bidMoney.multipliedBy(rate).dividedBy(36500).multipliedBy(cycle).multipliedBy(30)
+                    .decimalPlaces(2);
+            }
+            // 将收益显示到页面中
+            $("#shouyi").html(incomeMoney + "");
+        }
+        return true;
+    }
+
     function closeit() {
         $("#failurePayment").hide();
         $("#dialog-overlay1").hide();
