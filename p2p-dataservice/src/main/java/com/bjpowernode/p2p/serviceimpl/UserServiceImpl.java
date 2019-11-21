@@ -2,6 +2,7 @@ package com.bjpowernode.p2p.serviceimpl;
 
 import com.bjpowernode.p2p.common.constant.Constants;
 import com.bjpowernode.p2p.dao.user.UserMapper;
+import com.bjpowernode.p2p.model.user.User;
 import com.bjpowernode.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundValueOperations;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
         //先从缓存中获取平台总人数
         Long allUserCount = (Long) ops.get();
 
-        //如果缓存里没有，就从数据库里查，并放到缓存里
+        //如果缓存里没有，就从数据库里查，并放到缓存里（DCL）
         if (allUserCount == null) {
             synchronized (this) {
                 if (allUserCount == null) {
@@ -55,5 +56,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         return allUserCount;
+    }
+
+    /**
+     * 通过手机号查询是否有这个人
+     *
+     * @return
+     */
+    @Override
+    public User queryUserByPhone() {
+        //没有复杂业务处理，直接调用Dao层即可
+        return null;
     }
 }

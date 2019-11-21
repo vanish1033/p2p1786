@@ -1,5 +1,7 @@
 package com.bjpowernode.p2p.service;
 
+import com.bjpowernode.p2p.model.user.User;
+
 /**
  * 用户Service
  *
@@ -13,4 +15,10 @@ public interface UserService {
      * @return
      */
     Long queryAllUserCount();
+
+    /**
+     * 根据手机号看看能不能查到这个人
+     * @return
+     */
+    User queryUserByPhone();
 }
