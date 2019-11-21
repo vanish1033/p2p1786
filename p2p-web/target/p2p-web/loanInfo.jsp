@@ -190,18 +190,22 @@
         // 判断非空
         if ("" == bidMoney) {
             $(".max-invest-money").html("请输入投资金额");
+            $("#shouyi").html("");
             return false;
             // 判断是否为数字
         } else if (isNaN(bidMoney)) {
             $(".max-invest-money").html("请输入数字");
+            $("#shouyi").html("");
             return false;
             // 判断是否大于0
         } else if (bidMoney <= 0) {
             $(".max-invest-money").html("投资金额必须大于0");
+            $("#shouyi").html("");
             return false;
             // 判断是否为100的整数倍
         } else if (bidMoney % 100 != 0) {
             $(".max-invest-money").html("投资金额必须为100的整数倍");
+            $("#shouyi").html("");
             return false;
         } else {
             //校验通过，清空错误提示信息

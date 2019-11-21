@@ -79,13 +79,14 @@ public class LoanInfoController {
      */
     @RequestMapping("/loan/loanInfo")
     public String loanInfo(Model model, @RequestParam(value = "id", required = true) Integer id) {
-        //查询产品详情
+
+        // 查询产品详情
         LoanInfo loanInfo = loanInfoService.queryLoanInfoById(id);
 
-        //查询产品投资记录
+        // 查询产品投资记录
         List<BidInfo> bidInfos = bidInfoService.queryBidInfoByLoanId(id);
 
-        //把查出来的数据放到model里
+        // 把查出来的数据放到model里
         model.addAttribute("loanInfo", loanInfo);
         model.addAttribute("bidInfos", bidInfos);
 

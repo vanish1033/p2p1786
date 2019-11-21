@@ -36,7 +36,7 @@
               
               <div class="login-box clearfix" style="z-index:100;">
                 <label>手机号</label>
-                <input type="text" id="phone" name="phone" class="input_text" maxlength="11" placeholder="请输入11位手机号码" autocomplete="off" onblur="userRegistered();"/>
+                <input type="text" id="phone" name="phone" class="input_text" maxlength="11" placeholder="请输入11位手机号码" autocomplete="off" onblur="checkPhone();"/>
                 <span id="phoneOk" class="ok" style="display:none;"></span>
                 <div id="phoneErr" class="form-hint" style="display:none;"></div>
               </div>
